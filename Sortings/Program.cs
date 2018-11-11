@@ -33,8 +33,33 @@ namespace Sortings
             Console.WriteLine("Это " + end + " элемент");
         }
 
+        static void SelectionSort(int[] arr, int start, int end)
+        {
+            //сортировка выборкой
+            int temp, min;
 
-    static void InsertSort(int[] arr, int start, int end)
+            for (int i = 0; i < end - 1; i++)
+            {
+                min = i;
+
+                for (int j = i + 1; j < end; j++)
+                {
+                    if (arr[j] < arr[min])
+                    {
+                        min = j;
+                    }
+                }
+
+                if (min != i)
+                {
+                    temp = arr[i];
+                    arr[i] = arr[min];
+                    arr[min] = temp;
+                }
+            }
+        }
+
+        static void InsertSort(int[] arr, int start, int end)
         {
             //Сортировка вставками
             int newElement, location;
@@ -104,8 +129,9 @@ namespace Sortings
             }
             Console.WriteLine("Ввыберите метод сортировки: ");
             Console.WriteLine("1. Метод пузырька; ");
-            Console.WriteLine("2. Метод вставок; ");
-            Console.WriteLine("3. Метод быстрой сортировки. ");
+            Console.WriteLine("2. Метод выборки; ");
+            Console.WriteLine("3. Метод вставок; ");
+            Console.WriteLine("4. Метод быстрой сортировки. ");
             int num1= int.Parse(Console.ReadLine());
             switch (num1)
             {
@@ -113,9 +139,12 @@ namespace Sortings
                     Bool(arr, 0, n);
                     break;
                 case 2:
-                    InsertSort(arr, 0, n);
+                    SelectionSort(arr, 0, n);
                     break;
                 case 3:
+                    InsertSort(arr, 0, n);
+                    break;
+                case 4:
                     Partition(arr, 0, n-1);
                     break;
             }
